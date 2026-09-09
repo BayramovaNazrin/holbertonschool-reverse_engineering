@@ -1,1 +1,1 @@
-readelf -d target_binary | grep NEEDED | grep -oP '\[\K[^\]]+' | grep custom > external_library.txt
+readelf -d target_binary | grep NEEDED | grep -oP '\[\K[^\]]+' | grep custom > external_library.txt ^lib_custom_hbtn.so
