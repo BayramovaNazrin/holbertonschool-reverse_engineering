@@ -43,11 +43,20 @@ trim() {
     echo "$var"
 }
 
-magic_number="$(od -An -tx1 -N16 "$file_name" | tr -s ' ' | tr '[:lower:]' '[:upper:]' | tr -d '\n' | sed 's/^ *//')"
+magic_number="$(od -An -tx1 -N16 "$file_name" | tr -s ' ' | tr -d '\n' | sed 's/^ *//')"
 
 class="$(trim "$(echo "$header_output" | grep "Class:" | awk -F':' '{print $2}')")"
 
-byte_order="$(trim "$(echo "$header_output" | grep "Data:" | awk -F':' '{print $2}')")"
+# readelf prints e.g. "2's complement, little endian" - only keep
+# the "little endian" / "big endian" part.
+byte_order_raw="$(trim "$(echo "$header_output" | grep "Data:" | awk -F':' '{print $2}')")"
+if echo "$byte_order_raw" | grep -qi "little"; then
+    byte_order="little endian"
+elif echo "$byte_order_raw" | grep -qi "big"; then
+    byte_order="big endian"
+else
+    byte_order="$byte_order_raw"
+fi
 
 entry_point_address="$(trim "$(echo "$header_output" | grep "Entry point address:" | awk -F':' '{print $2}')")"
 
