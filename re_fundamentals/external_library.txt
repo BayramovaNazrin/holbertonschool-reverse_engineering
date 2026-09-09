@@ -1,1 +1,1 @@
-ldd target_binary
+readelf -d target_binary | grep NEEDED | grep -oP '\[\K[^\]]+' | grep custom > external_library.txt
