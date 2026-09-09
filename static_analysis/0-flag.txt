@@ -1,13 +1,1 @@
-Program: RE Challenge binary v1.2.3
-Purpose: Reads user input and validates it against a check via check_flag()
-
-Key strings found:
-- "Welcome to the RE challenge!" (banner)
-- "Usage: %s <input>" / "User input: %s" (input handling)
-- "/etc/myapp/config.cfg", "default.cfg" (config loading)
-- "Access Granted." (success message on valid input)
-- Error strings: "File not found!", "Invalid input!", "Access denied!"
-
-Key functions (from symbol table, binary not stripped):
-- print_welcome, print_error, generate_file_path,
-  handle_user_input, check_flag, config_file
+HOLB{Reverse_Engineering_is_Fun}
